@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class TicketService {
+public class LecteurJSON {
 
-    public String lireTickets(String json) throws IOException {
+    public String lireJSON(String json) throws IOException {
         // Chargement du fichier JSON depuis les ressources
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(json);
 
