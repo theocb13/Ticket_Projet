@@ -1,0 +1,34 @@
+{
+  "Poste_Informatique": [
+    {
+      "id": "Poste1",
+      "Utilisateur_affecte": "Alice",
+      "Etat": "en fonction",
+      "configuration": "Processeur Intel i7, 16GB RAM, 512GB SSD, écran 15 pouces"
+    },
+    {
+      "id": "Poste2",
+      "Utilisateur_affecte": "Bob",
+      "Etat": "en maintenance",
+      "configuration": "Processeur AMD Ryzen 5, 8GB RAM, 1TB HDD, écran 17 pouces"
+    },
+    {
+      "id": "Poste3",
+      "Utilisateur_affecte": "John",
+      "Etat": "en fonction",
+      "configuration": "Processeur Intel i3, 4GB RAM, 128GB SSD, écran 13 pouces"
+    },
+    {
+      "id": "Poste4",
+      "Utilisateur_affecte": "Tom",
+      "Etat": "en fonction",
+      "configuration": "Processeur Apple M1, 16GB RAM, 256GB SSD, écran Retina 13 pouces"
+    },
+    {
+      "id": "Poste5",
+      "Utilisateur_affecte": "Eve",
+      "Etat": "en commande",
+      "configuration": "Processeur Intel i9, 32GB RAM, 1TB SSD, écran 27 pouces"
+    }
+  ]
+}

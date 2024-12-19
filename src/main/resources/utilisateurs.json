@@ -1,0 +1,64 @@
+{
+  "Utilisateurs": [
+    {
+      "id": "U001",
+      "nom": "John Doe",
+      "email": "johndoe@example.com",
+      "mot_de_passe": "hashed_password123",
+      "date_derniere_connexion": "2024-12-12T08:45:00",
+      "statut": "Oui",
+      "Role": {
+        "utilisateur": "1",
+        "intervenant": "0"
+      }
+    },
+    {
+      "id": "U002",
+      "nom": "Alice Smith",
+      "email": "alicesmith@example.com",
+      "mot_de_passe": "hashed_password456",
+      "date_derniere_connexion": "2024-12-11T15:30:00",
+      "statut": "Non",
+      "Role": {
+        "utilisateur": "0",
+        "intervenant": "1"
+      }
+    },
+    {
+      "id": "U003",
+      "nom": "Bob Johnson",
+      "email": "bobjohnson@example.com",
+      "mot_de_passe": "hashed_password789",
+      "date_derniere_connexion": "2024-12-10T12:20:00",
+      "statut": "Oui",
+      "Role": {
+        "utilisateur": "1",
+        "intervenant": "0"
+      }
+    },
+    {
+      "id": "U004",
+      "nom": "Eve Carter",
+      "email": "evecarter@example.com",
+      "mot_de_passe": "hashed_password101",
+      "date_derniere_connexion": "2024-12-12T09:00:00",
+      "statut": "Oui",
+      "Role": {
+        "utilisateur": "0",
+        "intervenant": "1"
+      }
+    },
+    {
+      "id": "U005",
+      "nom": "Tom Wilson",
+      "email": "tomwilson@example.com",
+      "mot_de_passe": "hashed_password202",
+      "date_derniere_connexion": "2024-12-11T17:45:00",
+      "statut": "Non",
+      "Role": {
+        "utilisateur": "1",
+        "intervenant": "0"
+      }
+    }
+  ]
+}

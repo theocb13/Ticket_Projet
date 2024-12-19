@@ -1,0 +1,64 @@
+{
+    "tickets": [
+        {
+            "id": "John",
+            "titre": "probleme demarrage",
+            "description": "ben il demarre pas",
+            "date_creation": "2024-12-12T09:00:00",
+            "date_maj": "2024-12-12T09:00:00",
+            "Impact": "bloquant",
+            "Etat": "Ouvert",
+            "Utilisateur_createur": "John",
+            "Un poste informatique": "poste3",
+            "type_de_demande": "Incident"
+        },
+        {
+            "id": "Alice",
+            "titre": "erreur application",
+            "description": "l'application se ferme toute seule",
+            "date_creation": "2024-12-12T10:15:00",
+            "date_maj": "2024-12-12T10:20:00",
+            "Impact": "majeur",
+            "Etat": "En cours",
+            "Utilisateur_createur": "Alice",
+            "Un poste informatique": "poste1",
+            "type_de_demande": "Bug"
+        },
+        {
+            "id": "Bob",
+            "titre": "probleme connexion wifi",
+            "description": "impossible de se connecter au wifi",
+            "date_creation": "2024-12-12T11:00:00",
+            "date_maj": "2024-12-12T11:05:00",
+            "Impact": "mineur",
+            "Etat": "Ouvert",
+            "Utilisateur_createur": "Bob",
+            "Un poste informatique": "poste2",
+            "type_de_demande": "Support"
+        },
+        {
+            "id": "Eve",
+            "titre": "ecran noir",
+            "description": "l'ordinateur affiche un écran noir au démarrage",
+            "date_creation": "2024-12-12T12:00:00",
+            "date_maj": "2024-12-12T12:10:00",
+            "Impact": "bloquant",
+            "Etat": "Ouvert",
+            "Utilisateur_createur": "Eve",
+            "Un poste informatique": "poste5",
+            "type_de_demande": "Incident"
+        },
+        {
+            "id": "Tom",
+            "titre": "clavier ne fonctionne pas",
+            "description": "certaines touches du clavier ne répondent pas",
+            "date_creation": "2024-12-12T13:30:00",
+            "date_maj": "2024-12-12T13:35:00",
+            "Impact": "mineur",
+            "Etat": "Résolu",
+            "Utilisateur_createur": "Tom",
+            "Un poste informatique": "poste4",
+            "type_de_demande": "Maintenance"
+        }
+    ]
+}
