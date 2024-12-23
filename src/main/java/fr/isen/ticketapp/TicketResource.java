@@ -147,8 +147,6 @@ public class TicketResource {
         return ticket;
     }
 
-
-
     // POST : Créer un nouveau ticket dans la base de données
     @POST
     @Path("/bdd")

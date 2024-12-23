@@ -1,5 +1,10 @@
 package fr.isen.ticketapp;
 
+import fr.isen.ticketapp.interfaces.PosteRepository;
+import fr.isen.ticketapp.interfaces.UtilisateurRepository;
+import fr.isen.ticketapp.interfaces.models.PosteInformatique;
+import fr.isen.ticketapp.interfaces.models.Utilisateur;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -7,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 @Path("/postes")
 @Produces(MediaType.APPLICATION_JSON)
@@ -24,6 +30,9 @@ public class PostesResources {
         JSONObject jsonObject = new JSONObject(jsonContent);
         return jsonObject.getJSONArray("Poste_Informatique");
     }
+
+    @Inject
+    PosteRepository posteRepository;
 
     // GET : Récupérer tous les tickets
     @GET
@@ -110,5 +119,21 @@ public class PostesResources {
         } catch (IOException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erreur lors de la suppression du ticket.").build();
         }
+    }
+
+    @GET
+    @Path("/bdd")
+    public List<PosteInformatique> getAllPotesInformatiqueBDD() {
+        return posteRepository.listAll(); // Renvoie tous les tickets
+    }
+
+    @GET
+    @Path("/bdd/{id}")
+    public PosteInformatique getPostesInformatiqueByIdBDD(@PathParam("id") String id) {
+        PosteInformatique posteInformatique = posteRepository.find("id", id).firstResult();
+        if (posteInformatique == null) {
+            throw new NotFoundException("Ticket non trouvé.");
+        }
+        return posteInformatique;
     }
 }
