@@ -1,4 +1,4 @@
-package org.acme;
+package fr.isen.ticketapp;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

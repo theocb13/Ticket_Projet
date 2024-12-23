@@ -1,5 +1,8 @@
-package org.acme;
+package fr.isen.ticketapp;
 
+import fr.isen.ticketapp.interfaces.TicketRepository;
+import fr.isen.ticketapp.interfaces.models.Ticket;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -7,18 +10,23 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 @Path("/ticket")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TicketResource {
 
-        private final LecteurJSON lecteurJSON;
+    private final LecteurJSON lecteurJSON;
 
-        public TicketResource() {
-            this.lecteurJSON = new LecteurJSON(); // Initialisation de la classe LecteurJSON
-        }
+    public TicketResource() {
+        this.lecteurJSON = new LecteurJSON(); // Initialisation de la classe LecteurJSON
+    }
 
+    @Inject
+    TicketRepository ticketRepository;
+
+    // SECTION : Gestion des tickets via JSON
     // Méthode pour obtenir le tableau de tickets depuis le JSON
     private JSONArray getTicketsArray() throws IOException {
         String jsonContent = lecteurJSON.lireJSON("tickets.json"); // Appel à la méthode lireJSON
@@ -26,8 +34,9 @@ public class TicketResource {
         return jsonObject.getJSONArray("tickets");
     }
 
-    // GET : Récupérer tous les tickets
+    // GET : Récupérer tous les tickets depuis le fichier JSON
     @GET
+    @Path("/json")
     public Response getAllTickets() {
         try {
             JSONArray ticketsArray = getTicketsArray();
@@ -38,9 +47,9 @@ public class TicketResource {
         }
     }
 
-    // GET : Récupérer un ticket par ID
+    // GET : Récupérer un ticket par ID depuis le fichier JSON
     @GET
-    @Path("/{id}")
+    @Path("/json/{id}")
     public Response getTicketById(@PathParam("id") String id) {
         try {
             JSONArray ticketsArray = getTicketsArray();
@@ -57,8 +66,9 @@ public class TicketResource {
         }
     }
 
-    // POST : Créer un nouveau ticket
+    // POST : Créer un nouveau ticket dans le fichier JSON
     @POST
+    @Path("/json")
     public Response createTicket(String input) {
         try {
             JSONObject newTicket = new JSONObject(input);
@@ -73,9 +83,9 @@ public class TicketResource {
         }
     }
 
-    // PUT : Mettre à jour un ticket
+    // PUT : Mettre à jour un ticket dans le fichier JSON
     @PUT
-    @Path("/{id}")
+    @Path("/json/{id}")
     public Response updateTicket(@PathParam("id") String id, String input) {
         try {
             JSONObject updatedFields = new JSONObject(input);
@@ -97,9 +107,9 @@ public class TicketResource {
         }
     }
 
-    // DELETE : Supprimer un ticket
+    // DELETE : Supprimer un ticket du fichier JSON
     @DELETE
-    @Path("/{id}")
+    @Path("/json/{id}")
     public Response deleteTicket(@PathParam("id") String id) {
         try {
             JSONArray ticketsArray = getTicketsArray();
@@ -116,5 +126,61 @@ public class TicketResource {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Erreur lors de la suppression du ticket.").build();
         }
+    }
+
+    // SECTION : Gestion des tickets via BDD
+    // GET : Récupérer tous les tickets depuis la base de données
+    @GET
+    @Path("/bdd")
+    public List<Ticket> getAllTicketsBDD() {
+        return ticketRepository.listAll(); // Renvoie tous les tickets
+    }
+
+    // GET : Récupérer un ticket par ID depuis la base de données
+    @GET
+    @Path("/bdd/{id}")
+    public Ticket getTicketByIdBDD(@PathParam("id") String id) {
+        Ticket ticket = ticketRepository.find("id", id).firstResult();
+        if (ticket == null) {
+            throw new NotFoundException("Ticket non trouvé.");
+        }
+        return ticket;
+    }
+
+
+
+    // POST : Créer un nouveau ticket dans la base de données
+    @POST
+    @Path("/bdd")
+    public Response createTicketBDD(Ticket ticket) {
+        ticketRepository.persist(ticket); // Ajoute un nouveau ticket
+        return Response.status(Response.Status.CREATED).entity(ticket).build();
+    }
+
+    // PUT : Mettre à jour un ticket dans la base de données
+    @PUT
+    @Path("/bdd/{id}")
+    public Response updateTicketBDD(@PathParam("id") String id, Ticket updatedTicket) {
+        Ticket ticket = ticketRepository.find("id", id).firstResult();
+        if (ticket == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Ticket non trouvé.").build();
+        }
+        ticket.setTitle(updatedTicket.getTitle());
+        ticket.setDescription(updatedTicket.getDescription());
+        // Ajoutez les autres champs à mettre à jour ici...
+        ticketRepository.persist(ticket);
+        return Response.ok("Ticket mis à jour.").build();
+    }
+
+    // DELETE : Supprimer un ticket de la base de données
+    @DELETE
+    @Path("/bdd/{id}")
+    public Response deleteTicketBDD(@PathParam("id") String id) {
+        Ticket ticket = ticketRepository.find("id", id).firstResult();
+        if (ticket == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Ticket non trouvé.").build();
+        }
+        ticketRepository.delete(ticket);
+        return Response.noContent().build();
     }
 }
