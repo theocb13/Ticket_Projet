@@ -34,6 +34,7 @@ public class UtilisateurResource {
 
     // GET : Récupérer tous les utilisateurs
     @GET
+    @Path("/json")
     public Response getAllutilisateurs() {
         try {
             JSONArray utilisateursArray = getutilisateursArray();
@@ -45,7 +46,7 @@ public class UtilisateurResource {
 
     // GET : Récupérer un utilisateur par ID
     @GET
-    @Path("/{id}")
+    @Path("/json/{id}")
     public Response getutilisateurById(@PathParam("id") String id) {
         try {
             JSONArray utilisateursArray = getutilisateursArray();
@@ -63,6 +64,7 @@ public class UtilisateurResource {
 
     // POST : Créer un nouveau utilisateur
     @POST
+    @Path("/json")
     public Response createutilisateur(String input) {
         try {
             JSONObject newutilisateur = new JSONObject(input);
@@ -78,7 +80,7 @@ public class UtilisateurResource {
 
     // PUT : Mettre à jour un utilisateur
     @PUT
-    @Path("/{id}")
+    @Path("/json/{id}")
     public Response updateutilisateur(@PathParam("id") String id, String input) {
         try {
             JSONObject updatedFields = new JSONObject(input);
@@ -101,7 +103,7 @@ public class UtilisateurResource {
 
     // DELETE : Supprimer un utilisateur
     @DELETE
-    @Path("/{id}")
+    @Path("/json/{id}")
     public Response deleteutilisateur(@PathParam("id") String id) {
         try {
             JSONArray utilisateursArray = getutilisateursArray();

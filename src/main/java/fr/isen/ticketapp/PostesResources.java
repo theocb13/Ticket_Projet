@@ -36,6 +36,7 @@ public class PostesResources {
 
     // GET : Récupérer tous les tickets
     @GET
+    @Path("/json")
     public Response getAllTickets() {
         try {
             JSONArray ticketsArray = getTicketsArray();
@@ -47,7 +48,7 @@ public class PostesResources {
 
     // GET : Récupérer un ticket par ID
     @GET
-    @Path("/{id}")
+    @Path("/json/{id}")
     public Response getTicketById(@PathParam("id") String id) {
         try {
             JSONArray ticketsArray = getTicketsArray();
@@ -65,6 +66,7 @@ public class PostesResources {
 
     // POST : Créer un nouveau ticket
     @POST
+    @Path("/json")
     public Response createTicket(String input) {
         try {
             JSONObject newTicket = new JSONObject(input);
@@ -80,7 +82,7 @@ public class PostesResources {
 
     // PUT : Mettre à jour un ticket
     @PUT
-    @Path("/{id}")
+    @Path("/json/{id}")
     public Response updateTicket(@PathParam("id") String id, String input) {
         try {
             JSONObject updatedFields = new JSONObject(input);
@@ -103,7 +105,7 @@ public class PostesResources {
 
     // DELETE : Supprimer un ticket
     @DELETE
-    @Path("/{id}")
+    @Path("/json/{id}")
     public Response deleteTicket(@PathParam("id") String id) {
         try {
             JSONArray ticketsArray = getTicketsArray();
